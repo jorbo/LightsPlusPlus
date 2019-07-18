@@ -1,6 +1,6 @@
-#include "bridge.h"
+#include "bridge.hpp"
 
-
+using namespace lightspp;
 
 Bridge::Bridge(const std::string &address) {
     this->address = address;

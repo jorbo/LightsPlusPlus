@@ -1,7 +1,9 @@
 #include "gtest/gtest.h"
 #include "../testing_config.h"
+#include "HTTPHandler.hpp"
 namespace {
+    using namespace lightspp;
     TEST(network_tests, test_eq) {
-    ASSERT_STRCASEEQ("192.168.1.13", TEST_IP_ADDRESS.c_str());
+    ASSERT_NE(HTTPHandler::get("www.google.com"), "");
     }
 }
