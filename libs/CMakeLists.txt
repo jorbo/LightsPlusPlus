@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.14)
+project(lightsplusplus)
 include_directories(boost)
 add_subdirectory(jsoncpp-1.9.1)
 add_subdirectory(curlpp-0.8.1)
