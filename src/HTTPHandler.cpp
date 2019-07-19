@@ -5,6 +5,7 @@
 #include <sstream>
 #include <curlpp/cURLpp.hpp>
 #include <json/json.h>
+
 using namespace lightspp;
 
 
@@ -17,6 +18,7 @@ const std::string HTTPHandler::get(const std::string &route){
         easyHandle.setOpt(cURLpp::Options::Header(1));
         easyHandle.perform();
         result << easyHandle;
+
         return result.str();
     }
     catch(cURLpp::LogicError &e){
