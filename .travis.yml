@@ -5,9 +5,10 @@ compiler:
   - gcc
 
 before_install:
-  - sudo apt-get upgrade --allow-unauthenticated -y
-  - sudo apt-get update --allow-unauthenticated -y
   - sudo apt-get install jsoncpp libcurlpp -y
+addons:
+  apt:
+    update: true
 
 # the install step will take care of deploying a newer cmake version
 install:
