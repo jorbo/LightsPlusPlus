@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "basic_tests/basic_check.cpp"
+#include "basic_check.cpp"
 namespace {
     TEST(main_check, test_eq){
         ASSERT_EQ(0, 0);

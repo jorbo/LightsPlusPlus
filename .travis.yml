@@ -1,7 +1,10 @@
 language: cpp
-
+dist: trusty
 compiler:
   - gcc
+
+before_install:
+  - apt-get install jsoncpp libcurlpp
 
 # the install step will take care of deploying a newer cmake version
 install:

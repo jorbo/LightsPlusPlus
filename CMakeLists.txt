@@ -9,5 +9,5 @@ include_directories(include)
 include_directories(libs)
 add_subdirectory(src)
 add_subdirectory(libs)
-target_link_libraries(lightsplusplus ${CURLPP_LDFLAGS})
+target_link_libraries(lightsplusplus ${CURLPP_LDFLAGS} jsoncpp)
 

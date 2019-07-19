@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../testing_config.h"
+#include "testing_config.h"
 #include "HTTPHandler.hpp"
 namespace {
     using namespace lightspp;

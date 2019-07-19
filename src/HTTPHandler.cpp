@@ -3,7 +3,7 @@
 #include <curlpp/Options.hpp>
 #include <string>
 #include <sstream>
-#include <curlpp-0.8.1/include/curlpp/cURLpp.hpp>
+#include <curlpp/cURLpp.hpp>
 
 using namespace lightspp;
 
