@@ -4,7 +4,7 @@
 #include <string>
 #include <sstream>
 #include <curlpp/cURLpp.hpp>
-
+#include <jsoncpp/json/json.h>
 using namespace lightspp;
 
 
