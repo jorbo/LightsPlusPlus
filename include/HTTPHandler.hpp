@@ -1,7 +1,6 @@
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
 #include <string>
-#include <json/json.h>
 #include <iostream>
 
 #ifndef LIGHTSPLUSPLUS_HTTPHANDLER_HPP
