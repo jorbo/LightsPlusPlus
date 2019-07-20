@@ -6,7 +6,6 @@
 #ifndef LIGHTSPLUSPLUS_HTTPHANDLER_HPP
 #define LIGHTSPLUSPLUS_HTTPHANDLER_HPP
 
-using namespace curlpp::Options;
 namespace lightspp {
 /*!
  * This class is a wrapper around the curlpp library

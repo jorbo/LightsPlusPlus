@@ -9,7 +9,7 @@
 using namespace lightspp;
 
 
-const std::string HTTPHandler::get(const std::string &route){
+const std::string HTTPHandler::get (const std::string &route){
     try {
         cURLpp::Easy easyHandle;
         cURLpp::Cleanup cleanup;

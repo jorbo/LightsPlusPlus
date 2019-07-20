@@ -229,7 +229,7 @@ template <typename Iter> Iter fixZerosInTheEnd(Iter begin, Iter end) {
 
 
 // //////////////////////////////////////////////////////////////////////
-// Beginning of content of file: src/lib_json/json_reader.cpp
+// Beginning of content of file: src/lib_jsojsonn/json_reader.cpp
 // //////////////////////////////////////////////////////////////////////
 
 // Copyright 2007-2011 Baptiste Lepilleur and The JsonCpp Authors
