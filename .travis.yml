@@ -51,4 +51,4 @@ script:
   - make
 after_success:
   - ./tests/runAllTests
-  - coveralls --root .. -E "libs" -E "tests/libs" -E "docs" -E ".*gtest.*" -E ".*CMakeFiles.*"
+  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*"
