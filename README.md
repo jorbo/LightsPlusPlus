@@ -1,4 +1,4 @@
-# Lights++
+# Lights++ ![build](https://api.travis-ci.org/jorbo/LightsPlusPlus.svg?branch=master)
 
 Lights++ is a api library for the Phillips Hue lights system implemented in C++.
 

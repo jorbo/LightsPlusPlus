@@ -6,6 +6,10 @@ SET(COVERAGE OFF CACHE BOOL "Coverage")
 file(GLOB_RECURSE TEST_FILES RELATIVE ${CMAKE_SOURCE_DIR} "*.cpp")
 file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.cpp")
 
+
+file(GLOB_RECURSE TEST_FILES RELATIVE ${CMAKE_SOURCE_DIR} "*.cpp")
+file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.cpp")
+
 if(COMMAND cmake_policy)
     cmake_policy(SET CMP0003 NEW)
 endif(COMMAND cmake_policy)
@@ -17,3 +21,4 @@ add_subdirectory(libs)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 include_directories(libs)
 include_directories(../include)
+
