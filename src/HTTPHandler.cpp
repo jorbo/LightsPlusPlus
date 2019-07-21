@@ -9,16 +9,16 @@
 using namespace lightspp;
 
 
-const std::string HTTPHandler::get (const std::string &route){
+const std::string HTTPHandler::get (const std::string &route, const bool &withHeader){
     try {
         cURLpp::Easy easyHandle;
         cURLpp::Cleanup cleanup;
         std::stringstream result;
         easyHandle.setOpt(cURLpp::Options::Url(route));
-        easyHandle.setOpt(cURLpp::Options::Header(1));
+        easyHandle.setOpt(cURLpp::Options::Header(withHeader));
+        easyHandle.setOpt(cURLpp::Options::HttpGet());
         easyHandle.perform();
         result << easyHandle;
-
         return result.str();
     }
     catch(cURLpp::LogicError &e){

@@ -4,12 +4,16 @@ sudo: required
 compiler:
   - gcc
 
-before_install:
-  - sudo apt-get install libjsoncpp-dev libcurlpp-dev libjsoncpp0 -y
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - libcurlpp-dev
     update: true
-
+before_install:
+  - pip install --user cpp-coveralls
 # the install step will take care of deploying a newer cmake version
 install:
   # first we create a directory for the CMake binaries
@@ -39,8 +43,12 @@ before_script:
   - cd build
   # run cmake; here we assume that the project's
   # top-level CMakeLists.txt is located at '..'
+  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCOVERAGE=1 ..
   - cmake ..
 
 script:
   # once CMake has done its job we just build using make as usual
   - make
+after_success:
+  - ./tests/runAllTests
+  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*"

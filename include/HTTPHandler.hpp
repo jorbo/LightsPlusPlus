@@ -12,7 +12,7 @@ namespace lightspp {
  */
     class HTTPHandler {
     public:
-        static const std::string get(const std::string &route);
+        static const std::string get(const std::string &route, const bool &withHeader = false);
 
     private:
 
