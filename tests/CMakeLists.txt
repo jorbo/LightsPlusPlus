@@ -12,7 +12,7 @@ endif(COMMAND cmake_policy)
 
 add_executable(runAllTests main.cpp ${SOURCE_FILES})
 target_link_libraries(runAllTests lightsplusplus gtest gtest_main --coverage)
-target_compile_options(runAllTests PRIVATE --coverage -std=c++14 -g -Wall -Werror -Wextra -Wpedantic -Wconversion -Wswitch-default -Wswitch-enum -Wunreachable-code -Wwrite-strings -Wcast-align -Wshadow -Wundef)
+target_compile_options(runAllTests PRIVATE --coverage -O3 -std=c++14 -g -Wall -Werror -Wextra -Wpedantic -Wconversion -Wswitch-default -Wswitch-enum -Wunreachable-code -Wwrite-strings -Wcast-align -Wshadow -Wundef)
 add_subdirectory(libs)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 include_directories(libs)
