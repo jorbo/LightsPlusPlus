@@ -10,6 +10,6 @@ include_directories(../libs/json)
 file(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_SOURCE_DIR} "./*.cpp")
 
 include_directories(../include)
-add_library(lightsplusplus lightspp.cpp HTTPHandler.cpp jsoncpp.cpp)
+add_library(lightsplusplus lightspp.cpp HTTPHandler.cpp jsoncpp.cpp bridge.cpp)
 target_link_libraries(lightsplusplus ${CURLPP_LDFLAGS})
 
