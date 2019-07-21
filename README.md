@@ -9,7 +9,7 @@ Lights++ is a api library for the Phillips Hue lights system implemented in C++.
 
 ### Compiled with
 + Cmake version 3.14
-+ gcc 9.1.0
++ gcc 4.8.4
 
 Documentation can be found at [https://jorbo.dev/lightsplusplus](https://jorbo.dev/lightsplusplus)  
 Repo: [https://github.com/jorbo/lightsplusplus](https://github.com/jorbo/lightsplusplus)
