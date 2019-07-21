@@ -9,17 +9,56 @@
 using namespace lightspp;
 
 
-const std::string HTTPHandler::get (const std::string &route, const bool &withHeader){
+//! \brief Performs an http get request
+//! \param route url route for the request
+//! \param withHeader if you want the http header back
+//! \return the response as json
+const Json::Value HTTPHandler::get (const std::string &route, const bool &withHeader) {
     try {
-        cURLpp::Easy easyHandle;
+        cURLpp::Easy request;
         cURLpp::Cleanup cleanup;
         std::stringstream result;
-        easyHandle.setOpt(cURLpp::Options::Url(route));
-        easyHandle.setOpt(cURLpp::Options::Header(withHeader));
-        easyHandle.setOpt(cURLpp::Options::HttpGet());
-        easyHandle.perform();
-        result << easyHandle;
-        return result.str();
+        std::list<std::string> header;
+        header.emplace_back("Content-Type: application/json");
+        request.setOpt(new cURLpp::Options::Url(route));
+        request.setOpt(new cURLpp::Options::Header(withHeader));
+        request.setOpt(new cURLpp::Options::HttpHeader(header));
+        request.perform();
+        Json::Value json;
+        result << request;
+        result >> json;
+        return json;
+    }
+    catch (cURLpp::LogicError &e) {
+        return e.what();
+    }
+    catch (cURLpp::RuntimeError &e) {
+        return e.what();
+    }
+
+}
+//! \brief Performs an http post request
+//! \param route url route for the request
+//! \param messageBody body to send with request
+//! \param withHeader if you want the http header back
+//! \return the response as json
+const Json::Value HTTPHandler::post(const std::string &route, const std::string &messageBody, const bool &withHeader) {
+    try {
+        cURLpp::Easy request;
+        cURLpp::Cleanup cleanup;
+        std::stringstream result;
+        std::list<std::string> header;
+        header.emplace_back("Content-Type: application/json");
+        request.setOpt(new cURLpp::Options::Url(route));
+        request.setOpt(new cURLpp::Options::Header(withHeader));
+        request.setOpt(new cURLpp::Options::PostFields(messageBody));
+        request.setOpt(new cURLpp::Options::PostFieldSize(messageBody.length()));
+        request.setOpt(new cURLpp::Options::HttpHeader(header));
+        request.perform();
+        Json::Value json;
+        result << request;
+        result >> json;
+        return json;
     }
     catch(cURLpp::LogicError &e){
         return e.what();
@@ -27,6 +66,35 @@ const std::string HTTPHandler::get (const std::string &route, const bool &withHe
     catch(cURLpp::RuntimeError &e){
         return e.what();
     }
+}
 
-
+//! \brief Performs an http put request
+//! \param route url route for the request
+//! \param messageBody body to send with request
+//! \param withHeader if you want the http header back
+//! \return the response as json
+const Json::Value HTTPHandler::put(const std::string &route, const std::string &messageBody, const bool &withHeader) {
+    try {
+        cURLpp::Easy request;
+        cURLpp::Cleanup cleanup;
+        std::stringstream result;
+        std::list<std::string> header;
+        header.emplace_back("Content-Type: application/json");
+        request.setOpt(new cURLpp::Options::Url(route));
+        request.setOpt(new cURLpp::Options::Header(withHeader));
+        request.setOpt(new cURLpp::Options::CustomRequest{"PUT"});
+        request.setOpt(new cURLpp::Options::PostFields(messageBody));
+        request.setOpt(new cURLpp::Options::PostFieldSize(messageBody.length()));
+        request.setOpt(new cURLpp::Options::HttpHeader(header));
+        Json::Value json;
+        result << request;
+        result >> json;
+        return json;
+    }
+    catch(cURLpp::LogicError &e){
+        return e.what();
+    }
+    catch(cURLpp::RuntimeError &e){
+        return e.what();
+    }
 }

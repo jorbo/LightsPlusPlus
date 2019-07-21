@@ -1,4 +1,6 @@
-# Lights++ ![build](https://api.travis-ci.org/jorbo/LightsPlusPlus.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/jorbo/LightsPlusPlus/badge.svg?branch=dev)](https://coveralls.io/github/jorbo/LightsPlusPlus?branch=dev)
+# Lights++
+![build](https://api.travis-ci.org/jorbo/LightsPlusPlus.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/jorbo/LightsPlusPlus/badge.svg?branch=dev)](https://coveralls.io/github/jorbo/LightsPlusPlus?branch=dev)
+
 
 Lights++ is a api library for the Phillips Hue lights system implemented in C++.
 

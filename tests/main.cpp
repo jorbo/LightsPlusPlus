@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include "basic_check.cpp"
-#include "network_tests.cpp"
 namespace {
     TEST(main_check, test_eq) {
         ASSERT_EQ(0, 0);
