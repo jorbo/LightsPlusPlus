@@ -2,12 +2,11 @@
 #include "basic_check.cpp"
 #include "network_tests.cpp"
 namespace {
-    TEST(main_check, test_eq){
+    TEST(main_check, test_eq) {
         ASSERT_EQ(0, 0);
     }
-
-    int main(int argc, char *argv[]){
-        ::testing::InitGoogleTest(&argc, argv);
-        return RUN_ALL_TESTS();
-    }
+}
+int main(int argc, char *argv[]) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
