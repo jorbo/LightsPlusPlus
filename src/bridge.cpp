@@ -1,34 +1,23 @@
 #include "bridge.hpp"
-
+#include "HTTPHandler.hpp"
 using namespace lightspp;
 
 Bridge::Bridge(const std::string &address) {
     this->address = address;
 }
 
-Bridge::Bridge(const std::string &address, const std::string &port) {
-    this->address = address;
-    this->port = port;
-}
-
 //!
-//! \brief Discovers near by bridges via the UPnP strategy
+//! \brief Discovers near by bridges via the N-UPnP strategy
+//! <a href="https://developers.meethue.com/develop/application-design-guidance/hue-bridge-discovery/#n-upnp">see here</a>
 //!
-Bridge Bridge::UPnPDiscover() {
-    return Bridge();
-}
-
-//! Scans all ips from 192.168.1.XXX
-Bridge Bridge::IPScan(const std::string &port)
-{
-
-    std::string ip;
-
-    // for each ip in range (192.168.1.XXX->255 || 10.10.10.XXX->255 || 172.1...)
-    // keep looping till we get a 200 OK from the brige GET
-
-
-    return Bridge();
+Bridge Bridge::Discover() {
+    auto result = HTTPHandler::get("https://discovery.meethue.com/");
+    std::string ipAddress = result[0]["internalipaddress"].asString();
+    auto *bridge = new Bridge(ipAddress);
+    return *bridge;
 
 }
 
+const std::string Bridge::getAddress() const {
+    return this->address;
+}

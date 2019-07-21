@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "testing_config.h"
 #include "HTTPHandler.hpp"
+#include "bridge.hpp"
 #include "json/json.h"
 #include <string>
 namespace {
@@ -30,5 +31,10 @@ namespace {
         stream << root;
         ASSERT_FALSE(stream.str().length() == 0);
 
+    }
+
+    TEST(network_tests, can_find_bridge){
+        auto bridge = Bridge::Discover();
+        ASSERT_TRUE(bridge.getAddress() == "192.168.1.13");
     }
 }

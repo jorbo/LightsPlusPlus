@@ -7,23 +7,20 @@ namespace lightspp {
 
         public:
 
-            static Bridge UPnPDiscover();
+            static Bridge Discover();
+            const std::string getAddress() const;
+            ~Bridge() = default;
 
-            static Bridge IPScan(const std::string &port = "80");
 
 
-        private:
+    private:
             std::string address = "";
             std::string port = "";
 
-
             Bridge() = default;
-
-            ~Bridge() = default;
-
-            explicit Bridge(const std::string &address, const std::string &port = "80");
-
             explicit Bridge(const std::string &address);
+
+
 
 
     };
