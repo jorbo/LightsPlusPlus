@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "basic_check.cpp"
-//#define RUN_NETWORK_TESTS
+//#define RUN_NETWORK_TESTS //!< Uncomment this line if you want to run network tests (will break travis)
 #ifdef RUN_NETWORK_TESTS
 #include "network_tests.cpp"
 #endif
