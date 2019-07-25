@@ -18,6 +18,7 @@ Bridge Bridge::Discover() {
 
 }
 
+//! \brief returns the IPv4 address of the bridge
 const std::string Bridge::getAddress() const {
     return this->address;
 }
