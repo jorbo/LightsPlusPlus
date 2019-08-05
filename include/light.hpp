@@ -15,7 +15,7 @@ namespace lightspp {
 
         Light(int id);
 
-        static vector<Light> getAllLights(const Bridge &bridge);
+        vector<Light> getAllLights(const Bridge &bridge) const;
 
         bool isOn(const Bridge &bridge) const;
 

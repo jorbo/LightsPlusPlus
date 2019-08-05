@@ -7,7 +7,7 @@
 using namespace lightspp;
 
 Light::Light(int id) {
-    this->id = id;
+    this->_id = id;
 }
 
 //! \brief returns the on/off state of the light
@@ -124,7 +124,7 @@ void Light::setTransitionTime(const Bridge &bridge, const uint16_t &transitionTi
 
 //! \brief gets the current id of the light
 uint Light::getId() const {
-    return this->id;
+    return this->_id;
 }
 
 //! \brief sets the id of the light
@@ -145,13 +145,13 @@ std::string Light::getRoute(const Bridge &bridge) const {
     return bridge.getAddress()+"lights/" + std::to_string(this->getId())+"/state";
 }
 
-vector<Light> Light::getAllLights(const Bridge &bridge){
-    std::vector<Light> lights;
+vector<Light> Light::getAllLights(const Bridge &bridge) const {
+    auto *lights = new std::vector<Light>();
     Json::Value response = HTTPHandler::get(bridge.getAddress()+"/lights");
-    for_each(response.getMemberNames().begin(), response.getMemberNames().end(), [&](std::string *lightId){
-        Light l(std::stoi(*lightId));
-        lights.push_back(l);
+    for_each(response.getMemberNames().begin(), response.getMemberNames().end(), [&](std::string lightId){
+        Light l(std::stoi(lightId));
+        lights->push_back(l);
     });
-    return lights;
+    return *lights;
 }
 
