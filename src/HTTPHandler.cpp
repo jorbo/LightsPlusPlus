@@ -23,9 +23,9 @@ const Json::Value HTTPHandler::get (const std::string &route, const bool &withHe
         request.setOpt(new cURLpp::Options::Url(route));
         request.setOpt(new cURLpp::Options::Header(withHeader));
         request.setOpt(new cURLpp::Options::HttpHeader(header));
+        request.setOpt(new cURLpp::Options::WriteStream(&result));
         request.perform();
         Json::Value json;
-        result << request;
         result >> json;
         return json;
     }
@@ -54,9 +54,9 @@ const Json::Value HTTPHandler::post(const std::string &route, const std::string 
         request.setOpt(new cURLpp::Options::PostFields(messageBody));
         request.setOpt(new cURLpp::Options::PostFieldSize(messageBody.length()));
         request.setOpt(new cURLpp::Options::HttpHeader(header));
+        request.setOpt(new cURLpp::Options::WriteStream(&result));
         request.perform();
         Json::Value json;
-        result << request;
         result >> json;
         return json;
     }
@@ -86,8 +86,8 @@ const Json::Value HTTPHandler::put(const std::string &route, const std::string &
         request.setOpt(new cURLpp::Options::PostFields(messageBody));
         request.setOpt(new cURLpp::Options::PostFieldSize(messageBody.length()));
         request.setOpt(new cURLpp::Options::HttpHeader(header));
+        request.setOpt(new cURLpp::Options::WriteStream(&result));
         Json::Value json;
-        result << request;
         result >> json;
         return json;
     }

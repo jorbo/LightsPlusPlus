@@ -1,14 +1,15 @@
 #include "gtest/gtest.h"
-#include "basic_check.cpp"
+#include "testing_config.h"
+#include "lights_test.cpp"
+#include "bridge_tests.cpp"
+#define BOOST_NO_CXX11_SCOPED_ENUMS
+#include <boost/filesystem.hpp>
+#undef BOOST_NO_CXX11_SCOPED_ENUMS
+#include "json/writer.h"
+#include <fstream>
+#include <iostream>
+
 //#define RUN_NETWORK_TESTS //!< Uncomment this line if you want to run network tests (will break travis)
-#ifdef RUN_NETWORK_TESTS
-#include "network_tests.cpp"
-#endif
-namespace {
-    TEST(main_check, test_eq) {
-        ASSERT_EQ(0, 0);
-    }
-}
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
