@@ -11,6 +11,7 @@ addons:
     packages:
       - g++-6
       - libcurlpp-dev
+      - libboost-all-dev
     update: true
 before_install:
   - pip install --user cpp-coveralls
