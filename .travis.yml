@@ -11,6 +11,7 @@ addons:
     packages:
       - g++-6
       - libcurlpp-dev
+      - libboost-all-dev
     update: true
 before_install:
   - pip install --user cpp-coveralls
@@ -43,12 +44,10 @@ before_script:
   - cd build
   # run cmake; here we assume that the project's
   # top-level CMakeLists.txt is located at '..'
-  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCOVERAGE=1 ..
-  - cmake ..
+  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCOVERAGE=1 -DCMAKE_BUILD_TYPE=Release ..
 
 script:
   # once CMake has done its job we just build using make as usual
   - make
 after_success:
-  - ./tests/runAllTests
   - coveralls --root .. -e "libs/"  -e "tests/libs/" -E ".*gtest.*" -E ".*CMakeFiles.*"
