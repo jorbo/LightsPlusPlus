@@ -10,5 +10,5 @@ file(GLOB_RECURSE SOURCE_FILES "*.cpp")
 include_directories(../include)
 include_directories(../include/exceptions)
 add_library(lightsplusplus ${SOURCE_FILES})
-target_link_libraries(lightsplusplus ${CURLPP_LDFLAGS})
+
 
