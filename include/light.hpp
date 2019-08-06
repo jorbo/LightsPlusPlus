@@ -4,7 +4,6 @@
 #include <stdint-gcc.h>
 #include <tuple>
 #include "bridge.hpp"
-#include "exceptions/light_exceptions.hpp"
 #include "json/json.h"
 namespace lightspp {
     //! Abstract class representation of a light.

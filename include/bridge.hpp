@@ -3,7 +3,7 @@
 #ifndef LIGHTSPLUSPLUS_BRIDGE_H
 #define LIGHTSPLUSPLUS_BRIDGE_H
 namespace lightspp {
-/*! An abstract class that represents the hue bridge */
+    //!	Abstract class representation of the hue bridge
     class Bridge {
 
         public:
@@ -18,9 +18,8 @@ namespace lightspp {
 
 
     private:
-            std::string address = "";
-            std::string port = "";
-            std::string userHash = "";
+            std::string _address = "";
+            std::string _userHash = "";
 
             Bridge() = default;
 

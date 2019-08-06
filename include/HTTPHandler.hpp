@@ -7,9 +7,8 @@
 #define LIGHTSPLUSPLUS_HTTPHANDLER_HPP
 
 namespace lightspp {
-/*!
- * This class is a wrapper around the curlpp library
- */
+
+    //! Wrapper class for making cURLpp calls.
     class HTTPHandler {
     public:
         static const Json::Value get(const std::string &route, const bool &withHeader = false);

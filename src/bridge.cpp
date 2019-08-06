@@ -2,9 +2,10 @@
 #include "HTTPHandler.hpp"
 #include "json.h"
 using namespace lightspp;
-
+using namespace lightspp::Exceptions;
+//! Constructs a bridge object from the ip address of the bridge.
 Bridge::Bridge(const std::string &address) {
-    this->address = address + "/api/"+this->userHash+"/";
+    this->_address = address + "/api/" + this->_userHash + "/";
 }
 
 //!
@@ -22,12 +23,12 @@ Bridge Bridge::Discover() {
 
 //! \brief returns the IPv4 address of the bridge
 std::string Bridge::getAddress() const {
-    return this->address;
+    return this->_address;
 }
 
 //! \brief returns the user
 std::string Bridge::getUser() const {
-    return this->userHash;
+    return this->_userHash;
 }
 
 //! \brief Creates a new user to make api calls
@@ -41,11 +42,12 @@ std::string Bridge::createUser(const std::string &applicationName, const std::st
         throw LinkButtonNotPressed();
     }
     else {
-        this->userHash = result[0]["success"]["username"].asString();
+        this->_userHash = result[0]["success"]["username"].asString();
     }
-    return this->userHash;
+    return this->_userHash;
 }
 
+//! Set the user hash to make api calls with
 void Bridge::setUser(const std::string &userHash) {
-    this->userHash = userHash;
+    this->_userHash = userHash;
 }
