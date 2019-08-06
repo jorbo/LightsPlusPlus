@@ -2,6 +2,7 @@
 #include "bridge.hpp"
 
 using namespace lightspp;
+using namespace lightspp::Exceptions;
 namespace {
     TEST(bridge_tests, link_button_not_pressed_test) {
         Bridge bridge = Bridge::Discover();

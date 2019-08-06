@@ -5,7 +5,7 @@ using namespace lightspp;
 using namespace lightspp::Exceptions;
 //! Constructs a bridge object from the ip address of the bridge.
 Bridge::Bridge(const std::string &address) {
-    this->_address = address + "/api/" + this->_userHash + "/";
+    this->_address = address + "/api/";
 }
 
 //!
@@ -23,7 +23,7 @@ Bridge Bridge::Discover() {
 
 //! \brief returns the IPv4 address of the bridge
 std::string Bridge::getAddress() const {
-    return this->_address;
+    return this->_address + this->_userHash + "/";
 }
 
 //! \brief returns the user
