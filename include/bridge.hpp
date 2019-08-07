@@ -8,6 +8,7 @@ namespace lightspp {
 
         public:
             explicit Bridge(const std::string &address);
+            Bridge(const std::string &address, const std::string &userHash);
             static Bridge Discover();
             void setUser(const std::string &userHash);
             std::string getUser() const;

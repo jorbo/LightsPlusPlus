@@ -8,6 +8,12 @@ Bridge::Bridge(const std::string &address) {
     this->_address = address + "/api/";
 }
 
+//! Constructs a bridge object from ip address and user hash
+Bridge::Bridge(const std::string &address, const std::string &userHash) {
+    this->_address = address + "/api/";
+    this->_userHash = userHash;
+}
+
 //!
 //! \brief Discovers near by bridges via the N-UPnP strategy
 //! <a href="https://developers.meethue.com/develop/application-design-guidance/hue-bridge-discovery/#n-upnp">see here</a>
@@ -51,3 +57,5 @@ std::string Bridge::createUser(const std::string &applicationName, const std::st
 void Bridge::setUser(const std::string &userHash) {
     this->_userHash = userHash;
 }
+
+
