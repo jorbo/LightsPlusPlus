@@ -22,6 +22,7 @@ Json::Value Light::setOn(const Bridge &bridge, const bool &on) {
     body["on"] = on;
     Json::StreamWriterBuilder builder;
     return HTTPHandler::put(this->getRoute(bridge),Json::writeString(builder, body));
+
  }
 
  //! \brief return the current brightness of the light
@@ -35,6 +36,7 @@ Json::Value Light::setBrightness(const Bridge &bridge, const uint8_t &brightness
     body["bri"] = brightness;
     Json::StreamWriterBuilder builder;
     return HTTPHandler::put(this->getRoute(bridge),Json::writeString(builder, body));
+
 }
 
 //! \brief returns the current hue of the light
@@ -48,6 +50,7 @@ Json::Value Light::setHue(const Bridge &bridge, const uint16_t &hue) {
     body["hue"] = hue;
     Json::StreamWriterBuilder builder;
     return HTTPHandler::put(this->getRoute(bridge),Json::writeString(builder, body));
+
 }
 
 //! \brief returns the current saturation level of the light
@@ -91,6 +94,7 @@ Json::Value Light::setColorTemperature(const Bridge &bridge, const uint16_t &col
     body["ct"] = colorTemperature;
     Json::StreamWriterBuilder builder;
     return HTTPHandler::put(this->getRoute(bridge),Json::writeString(builder, body));
+
 }
 
 //! \brief returns the current alert mode of the light
@@ -180,4 +184,3 @@ Json::Value Light::setName(const Bridge &bridge, std::string name) {
     Json::StreamWriterBuilder builder;
     return HTTPHandler::put(bridge.getAddress()+"lights/" + std::to_string(this->getId()),Json::writeString(builder, body));
 }
-

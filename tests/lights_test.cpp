@@ -7,7 +7,6 @@
 using namespace lightspp;
 
 namespace {
-
     TEST(lights_test, isOn){
         ASSERT_TRUE(light.isOn(bridge));
     }
@@ -76,7 +75,4 @@ namespace {
     TEST(lights_test, setName){
         ASSERT_FALSE(light.setName(bridge, "front")[0].isMember("error"));
     }
-
-
-
 }
