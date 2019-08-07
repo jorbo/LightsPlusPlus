@@ -7,6 +7,12 @@ using namespace lightspp::Exceptions;
 Bridge::Bridge(const std::string &address) {
     this->_address = address + "/api/";
 }
+//! Constructs a bridge object from ip address and user hash
+Bridge::Bridge(const std::string &address, const std::string &userHash) {
+    this->_address = address + "/api/";
+    this->_userHash = userHash;
+
+}
 
 //!
 //! \brief Discovers near by bridges via the N-UPnP strategy

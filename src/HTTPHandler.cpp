@@ -1,9 +1,10 @@
 #include "HTTPHandler.hpp"
+#include <curlpp/cURLpp.hpp>
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
 #include <string>
 #include <sstream>
-#include <curlpp/cURLpp.hpp>
+
 #include <json/json.h>
 
 using namespace lightspp;
@@ -87,6 +88,7 @@ const Json::Value HTTPHandler::put(const std::string &route, const std::string &
         request.setOpt(new cURLpp::Options::PostFieldSize(messageBody.length()));
         request.setOpt(new cURLpp::Options::HttpHeader(header));
         request.setOpt(new cURLpp::Options::WriteStream(&result));
+        request.perform();
         Json::Value json;
         result >> json;
         return json;
