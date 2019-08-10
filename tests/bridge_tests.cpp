@@ -8,8 +8,4 @@ namespace {
         ASSERT_THROW(bridge.createUser("lightspptest", "test_user"), LinkButtonNotPressed);
     }
 
-    TEST(bridge_tests, link_button_is_pressed_test) {
-        ASSERT_NO_THROW(bridge.createUser("lightspptest", "test_user"));
-    }
-
 }

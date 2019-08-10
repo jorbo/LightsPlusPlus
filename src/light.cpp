@@ -157,13 +157,13 @@ std::string Light::getRoute(const Bridge &bridge) const {
 
 //! Returns a list of all the lights that the bridge knows about.
 std::vector<Light> Light::getAllLights(const Bridge &bridge) const {
-    auto *lights = new std::vector<Light>();
+    std::vector<Light> lights;
     Json::Value response = HTTPHandler::get(bridge.getAddress()+"/lights");
     for_each(response.getMemberNames().begin(), response.getMemberNames().end(), [&](const std::string &lightId){
         Light l(std::stoi(lightId));
-        lights->push_back(l);
+        lights.push_back(l);
     });
-    return *lights;
+    return lights;
 }
 
 //! Returns the name of the light
@@ -174,7 +174,7 @@ std::string Light::getName(const Bridge &bridge) {
 
 
 //! Sets the name of the light
-Json::Value Light::setName(const Bridge &bridge, std::string name) {
+Json::Value Light::setName(const Bridge &bridge, const string &name) {
     Json::Value body;
     body["name"] = name;
     Json::StreamWriterBuilder builder;

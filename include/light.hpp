@@ -58,8 +58,7 @@ namespace lightspp {
 
         std::string getName(const Bridge &bridge);
 
-        Json::Value setName(const Bridge &bridge, std::string name);
-
+        Json::Value setName(const Bridge &bridge, const string &name);
 
     private:
         uint _id;
