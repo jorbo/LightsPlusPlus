@@ -50,4 +50,4 @@ script:
   # once CMake has done its job we just build using make as usual
   - make
 after_success:
-  - coveralls --root .. -e "libs/"  -e "tests/libs/" -E ".*gtest.*" -E ".*CMakeFiles.*"
+  - bash <(curl -s https://codecov.io/bash)

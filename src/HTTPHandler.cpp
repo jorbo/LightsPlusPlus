@@ -14,7 +14,7 @@ using namespace lightspp;
 //! \param route url route for the request
 //! \param withHeader if you want the http header back
 //! \return the response as json
-const Json::Value HTTPHandler::get (const std::string &route, const bool &withHeader) {
+Json::Value HTTPHandler::get(const std::string &route, const bool &withHeader) {
     try {
         cURLpp::Easy request;
         cURLpp::Cleanup cleanup;
@@ -43,7 +43,7 @@ const Json::Value HTTPHandler::get (const std::string &route, const bool &withHe
 //! \param messageBody body to send with request
 //! \param withHeader if you want the http header back
 //! \return the response as json
-const Json::Value HTTPHandler::post(const std::string &route, const std::string &messageBody, const bool &withHeader) {
+Json::Value HTTPHandler::post(const std::string &route, const std::string &messageBody, const bool &withHeader) {
     try {
         cURLpp::Easy request;
         cURLpp::Cleanup cleanup;
@@ -74,7 +74,7 @@ const Json::Value HTTPHandler::post(const std::string &route, const std::string 
 //! \param messageBody body to send with request
 //! \param withHeader if you want the http header back
 //! \return the response as json
-const Json::Value HTTPHandler::put(const std::string &route, const std::string &messageBody, const bool &withHeader) {
+Json::Value HTTPHandler::put(const std::string &route, const std::string &messageBody, const bool &withHeader) {
     try {
         cURLpp::Easy request;
         cURLpp::Cleanup cleanup;
@@ -99,4 +99,29 @@ const Json::Value HTTPHandler::put(const std::string &route, const std::string &
     catch(cURLpp::RuntimeError &e){
         return e.what();
     }
+}
+
+Json::Value HTTPHandler::del(const std::string &route, const bool &withHeader) {
+    try{
+        cURLpp::Easy request;
+        cURLpp::Cleanup cleanup;
+        std::stringstream result;
+        std::list<std::string> header;
+        header.emplace_back("Content-Type: application/json");
+        request.setOpt(new cURLpp::Options::Url(route));
+        request.setOpt(new cURLpp::Options::Header(withHeader));
+        request.setOpt(new cURLpp::Options::CustomRequest{"DELETE"});
+        request.setOpt(new cURLpp::Options::HttpHeader(header));
+        request.setOpt(new cURLpp::Options::WriteStream(&result));
+        request.perform();
+        Json::Value json;
+        result >> json;
+        return json;
+    }
+    catch(cURLpp::LogicError &e){
+        return e.what();
+    }
+    catch(cURLpp::RuntimeError &e){
+        return e.what();
+}
 }

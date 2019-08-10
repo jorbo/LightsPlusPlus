@@ -1,5 +1,5 @@
 # Lights++
-![build](https://api.travis-ci.org/jorbo/LightsPlusPlus.svg?branch=master)
+![build](https://api.travis-ci.org/jorbo/LightsPlusPlus.svg?branch=master) [![codecov](https://codecov.io/gh/jorbo/LightsPlusPlus/branch/master/graph/badge.svg)](https://codecov.io/gh/jorbo/LightsPlusPlus)
 
 
 

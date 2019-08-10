@@ -40,6 +40,9 @@ namespace {
         ASSERT_FALSE(light.setSaturation(bridge, 242)[0].isMember("error"));
     }
 
+
+    // TODO: think of a new way to test this
+    // his will basically always fail because of floating point comparison
     TEST(lights_test, getXyColorSpace){
         std::tuple<float, float> xy = light.getXyColorspace(bridge);
         float x = std::get<0>(xy);
@@ -50,6 +53,13 @@ namespace {
     TEST(lights_test, setXyColorSpace){
         std::tuple<float, float> xy = std::make_tuple(0.1644, 0.0833);
         ASSERT_FALSE(light.setXyColorspace(bridge, xy)[0].isMember("error"));
+    }
+
+    TEST(lights_test, getColorTemp){
+        ASSERT_EQ(light.getColorTemperature(bridge), 153);
+    }
+    TEST(lights_test, setColorTemp){
+        ASSERT_FALSE(light.setColorTemperature(bridge, 153)[0].isMember("error"));
     }
 
     TEST(lights_test, getAlert){
