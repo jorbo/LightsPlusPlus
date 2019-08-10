@@ -7,11 +7,11 @@ using namespace lightspp::Exceptions;
 Bridge::Bridge(const std::string &address) {
     this->_address = address + "/api/";
 }
-
 //! Constructs a bridge object from ip address and user hash
 Bridge::Bridge(const std::string &address, const std::string &userHash) {
     this->_address = address + "/api/";
     this->_userHash = userHash;
+
 }
 
 //!
@@ -57,5 +57,3 @@ std::string Bridge::createUser(const std::string &applicationName, const std::st
 void Bridge::setUser(const std::string &userHash) {
     this->_userHash = userHash;
 }
-
-
