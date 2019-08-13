@@ -176,11 +176,18 @@ std::string Light::getName(const Bridge &bridge) {
 
 }
 
-
 //! Sets the name of the light
 Json::Value Light::setName(const Bridge &bridge, const string &name) {
     Json::Value body;
     body["name"] = name;
     Json::StreamWriterBuilder builder;
     return HTTPHandler::put(bridge.getAddress()+"lights/" + std::to_string(this->getId()),Json::writeString(builder, body));
+}
+
+Json::Value Light::getNewLights(const Bridge &bridge) {
+    return HTTPHandler::post(bridge.getAddress() + "lights", "");
+}
+
+Json::Value Light::deleteLight(const Bridge &bridge) {
+    return HTTPHandler::del(this->getRoute(bridge));
 }
