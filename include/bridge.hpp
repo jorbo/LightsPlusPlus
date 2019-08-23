@@ -1,5 +1,7 @@
 #include <string>
 #include <exceptions/bridge_exceptions.hpp>
+#include <memory>
+
 #ifndef LIGHTSPLUSPLUS_BRIDGE_H
 #define LIGHTSPLUSPLUS_BRIDGE_H
 namespace lightspp {
@@ -7,6 +9,7 @@ namespace lightspp {
     class Bridge {
 
         public:
+            static shared_ptr <Bridge> *bridge;
             explicit Bridge(const std::string &address);
             Bridge(const std::string &address, const std::string &userHash);
             static Bridge Discover();

@@ -1,9 +1,9 @@
-# Lights++
+# Lights++https://duckduckgo.com/?q=chat%5D&t=ffab&atb=v173-1
 ![build](https://api.travis-ci.org/jorbo/LightsPlusPlus.svg?branch=master) [![codecov](https://codecov.io/gh/jorbo/LightsPlusPlus/branch/master/graph/badge.svg)](https://codecov.io/gh/jorbo/LightsPlusPlus)
 
 
 
-Lights++ is a api library for the Phillips Hue lights system implemented in C++.
+Lights++ is a api wrapper for the Phillips Hue lights system implemented in C++.
 
 ## Goals:
 + Create a stable api for interacting with the hue lights
