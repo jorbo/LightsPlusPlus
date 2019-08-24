@@ -144,3 +144,11 @@ Json::Value Light::setAttribute(const std::tuple<float, float> &value) {
     Json::StreamWriterBuilder builder;
     return HTTPHandler::put(this->getRoute() + "/state", Json::writeString(builder, body));
 }
+
+Json::Value Light::getNewLights(const Bridge &bridge) {
+    return HTTPHandler::post(bridge.getAddress() + "lights", "");
+}
+
+Json::Value Light::deleteLight(const Bridge &bridge) {
+    return HTTPHandler::del(this->getRoute(bridge));
+}
