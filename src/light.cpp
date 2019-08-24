@@ -150,5 +150,5 @@ Json::Value Light::getNewLights(const Bridge &bridge) {
 }
 
 Json::Value Light::deleteLight(const Bridge &bridge) {
-    return HTTPHandler::del(this->getRoute(bridge));
+    return HTTPHandler::del(this->getRoute());
 }
