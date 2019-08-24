@@ -52,6 +52,7 @@ namespace lightspp {
 
         static Json::Value getNewLights();
 
+
     private:
         uint _id;
 
