@@ -51,10 +51,6 @@ namespace lightspp {
         Json::Value deleteLight();
 
         static Json::Value getNewLights();
-
-
-        Json::Value deleteLight(const Bridge &bridge);
-
         static Json::Value getNewLights(const Bridge &bridge);
 
 
