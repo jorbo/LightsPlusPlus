@@ -34,10 +34,3 @@ script:
 - make
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-deploy:
-  provider: releases
-  api_key:
-    secure: 2XS2Xz08KuFhysCdxK3QZa6CvAd8JtgErBJPU/I+kQYu0DGB9Da18g28916tbaCoUvEvfIORE8YPEt4nYoRJsJ0kl2DPEufAqX9WWglH4HBMaplxkVfGPW8hcqMZJaxZihv64S/N3gk4tR2eRhhsvk4dz05y/goxCoNeFOZXkuuSP7kOZ8HcXFoUNw2Ac8QtLgvaicMGT2y9+tV8grMnZIGiSdi7cpuIDr+qhzH3TmRfaXI++0cwnLjVUYFDCLHThbi5S4OTzCgEifh6yg24WOurnCO6fj8nc/nH4Dg7FU/XJANIrIE2xKgou4iOVi9UCygc0nGkMgzrFGTBAb4xv3TBLrPbPzOoYqSxqCZnM//dIagBPYB5DfK69mLHoqFwaRXEdLUuxkW6xXmwcdgwwSU7V8hKtsv052cHYxzux82KTwGfIKw8HK7Q4bqWhRMBMzuIdlq6P+9jAX0bFhGtDvijeP094JewM6nrMEA2KAO9F0v9HMOVJXe6SsLWn15ew45VB8uaBhuw+C3sx4/TxRT9Q1giUysexQm386tR6c8ohDAhu7puQkSQdXJ4yainkKzB5P/vqXYfS0uqsKHregSVZr4U90uQSqzO/fGMVeEHWT03JGFxJHUHjtpjKEMdFJgVGsngZWe/dWpHE0Z9hOtXbAxwKC0Dms2SGxvm3fk=
-  file: src/liblightsplusplus.a
-  on:
-    repo: jorbo/LightsPlusPlus
