@@ -25,7 +25,7 @@ namespace lightspp {
         static std::vector<Group> getAllGroups();
 
         static Group createGroup(const std::vector<Light> &lights, const std::string &name,
-                                 const std::string &classType = "LightGroup",
+                                 const std::string &type = "LightGroup",
                                  const std::string &roomType = "Other");
 
         bool isOn() const;
@@ -74,8 +74,9 @@ namespace lightspp {
 
         int _id;
 
-        Json::Value getState() const;
+        void setId(uint id);
 
+        Json::Value getState() const;
         std::string getRoute() const;
 
         template<class T>

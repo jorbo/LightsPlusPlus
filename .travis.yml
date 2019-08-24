@@ -3,52 +3,41 @@ language: cpp
 dist: trusty
 sudo: required
 compiler:
-  - gcc
-
+- gcc
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-6
-      - libcurlpp-dev
-      - libboost-all-dev
+    - g++-6
+    - libcurlpp-dev
+    - libboost-all-dev
     update: true
 before_install:
-  - pip install --user cpp-coveralls
-# the install step will take care of deploying a newer cmake version
+- pip install --user cpp-coveralls
 install:
-  # first we create a directory for the CMake binaries
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
-  # we use wget to fetch the cmake binaries
-  - travis_retry wget --no-check-certificate https://cmake.org/files/v3.14/cmake-3.14.0-Linux-x86_64.tar.gz
-  # this is optional, but useful:
-  # do a quick md5 check to ensure that the archive we downloaded did not get compromised
-  - echo "91dc9af7345e458eb10c853aa875e591efb7079a045641685ddec8d973c2b2bc *cmake-3.14.0-Linux-x86_64.tar.gz" > cmake_sha256.txt
-  - sha256sum -c cmake_sha256.txt
-  # extract the binaries; the output here is quite lengthy,
-  # so we swallow it to not clutter up the travis console
-  - tar -xvf cmake-3.14.0-Linux-x86_64.tar.gz > /dev/null
-  - mv cmake-3.14.0-Linux-x86_64 cmake-install
-  # add both the top-level directory and the bin directory from the archive
-  # to the system PATH. By adding it to the front of the path we hide the
-  # preinstalled CMake with our own.
-  - PATH=${DEPS_DIR}/cmake-install:${DEPS_DIR}/cmake-install/bin:$PATH
-  # don't forget to switch back to the main build directory once you are done
-  - cd ${TRAVIS_BUILD_DIR}
-
+- DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+- mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
+- travis_retry wget --no-check-certificate https://cmake.org/files/v3.14/cmake-3.14.0-Linux-x86_64.tar.gz
+- echo "91dc9af7345e458eb10c853aa875e591efb7079a045641685ddec8d973c2b2bc *cmake-3.14.0-Linux-x86_64.tar.gz"
+  > cmake_sha256.txt
+- sha256sum -c cmake_sha256.txt
+- tar -xvf cmake-3.14.0-Linux-x86_64.tar.gz > /dev/null
+- mv cmake-3.14.0-Linux-x86_64 cmake-install
+- PATH=${DEPS_DIR}/cmake-install:${DEPS_DIR}/cmake-install/bin:$PATH
+- cd ${TRAVIS_BUILD_DIR}
 before_script:
-  # create a build folder for the out-of-source build
-  - mkdir build
-  # switch to build directory
-  - cd build
-  # run cmake; here we assume that the project's
-  # top-level CMakeLists.txt is located at '..'
-  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCMAKE_BUILD_TYPE=Release ..
-
+- mkdir build
+- cd build
+- CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCMAKE_BUILD_TYPE=Release ..
 script:
-  # once CMake has done its job we just build using make as usual
-  - make
+- make
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
+deploy:
+  provider: releases
+  api_key:
+    secure: 2XS2Xz08KuFhysCdxK3QZa6CvAd8JtgErBJPU/I+kQYu0DGB9Da18g28916tbaCoUvEvfIORE8YPEt4nYoRJsJ0kl2DPEufAqX9WWglH4HBMaplxkVfGPW8hcqMZJaxZihv64S/N3gk4tR2eRhhsvk4dz05y/goxCoNeFOZXkuuSP7kOZ8HcXFoUNw2Ac8QtLgvaicMGT2y9+tV8grMnZIGiSdi7cpuIDr+qhzH3TmRfaXI++0cwnLjVUYFDCLHThbi5S4OTzCgEifh6yg24WOurnCO6fj8nc/nH4Dg7FU/XJANIrIE2xKgou4iOVi9UCygc0nGkMgzrFGTBAb4xv3TBLrPbPzOoYqSxqCZnM//dIagBPYB5DfK69mLHoqFwaRXEdLUuxkW6xXmwcdgwwSU7V8hKtsv052cHYxzux82KTwGfIKw8HK7Q4bqWhRMBMzuIdlq6P+9jAX0bFhGtDvijeP094JewM6nrMEA2KAO9F0v9HMOVJXe6SsLWn15ew45VB8uaBhuw+C3sx4/TxRT9Q1giUysexQm386tR6c8ohDAhu7puQkSQdXJ4yainkKzB5P/vqXYfS0uqsKHregSVZr4U90uQSqzO/fGMVeEHWT03JGFxJHUHjtpjKEMdFJgVGsngZWe/dWpHE0Z9hOtXbAxwKC0Dms2SGxvm3fk=
+  file: src/liblightsplusplus.a
+  on:
+    repo: jorbo/LightsPlusPlus

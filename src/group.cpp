@@ -9,11 +9,11 @@ using namespace lightspp;
 const std::string Group::classList[3] = { "LightGroup", "Entertainment", "Room" };
 
 const std::string Group::roomTypeList[39] =  {
-    "LivingRoom", "Kitchen", "Dining", "Bedroom", "KidsBedroom", "Bathroom", "Nursery",
-    "Recreation", "Office", "Gym", "Hallway", "Toilet", "FrontDoor", "Garage", "Terrace",
-    "Garden", "Driveway", "Carport", "Other", "Home", "Downstairs", "Upstairs", "TopFloor",
-    "Attic", "GuestRoom", "Staircase", "Lounge", "ManCave", "Computer", "Studio", "Music",
-    "TV", "Reading", "Closet", "Storage", "LaundryRoom", "Balcony", "Porch", "Barbecue"
+    "Living room", "Kitchen", "Dining", "Bedroom", "Kids bedroom", "Bathroom", "Nursery",
+    "Recreation", "Office", "Gym", "Hallway", "Toilet", "Front door", "Garage", "Terrace",
+    "Garden", "Driveway", "Carport", "Other", "Home", "Downstairs", "Upstairs", "Top floor",
+    "Attic", "Guest room", "Staircase", "Lounge", "Man cave", "Computer", "Studio", "Music",
+    "TV", "Reading", "Closet", "Storage", "Laundry room", "Balcony", "Porch", "Barbecue"
 };
 
 Group::Group(const std::vector<Light> &lights, const std::string &name, const std::string &classType,
@@ -33,27 +33,38 @@ std::vector<Group> Group::getAllGroups() {
 }
 
 
-Group Group::createGroup(const std::vector<Light> &lights, const std::string &name, const std::string &classType, const std::string &roomType) {
+Group Group::createGroup(const std::vector<Light> &lights, const std::string &name, const std::string &type, const std::string &roomType) {
     Json::Value body;
     body["name"] = name;
-    body["class"] = (std::find(std::begin(classList), std::end(classList), classType) != std::end(classList)) ? classType : "LightGroup";
-    body["type"] = (std::find(std::begin(roomTypeList), std::end(roomTypeList), roomType) != std::end(roomTypeList)) ? roomType : "Other";
+    body["type"] = (std::find(std::begin(classList), std::end(classList), type) != std::end(classList)) ? type : "LightGroup";
+    if(body["type"].asString() == "Room")
+        body["class"] = (std::find(std::begin(roomTypeList), std::end(roomTypeList), roomType) != std::end(roomTypeList)) ? roomType : "Other";
     body["lights"] = Json::Value(Json::arrayValue);
+
     for_each(lights.begin(), lights.end(), [&](const Light &light){
         body["lights"].append(std::to_string(light.getId()));
     });
+
     Json::StreamWriterBuilder builder;
     Json::Value response = HTTPHandler::post(Bridge::bridge->get()->getAddress()+"groups", Json::writeString(builder, body));
-    return Group(response[0]["success"]["id"].asUInt());
+    std::cout << response << std::endl;
+    std::string id = response[0]["success"]["id"].asString();
+    auto group = Group(std::stoi(id));
+    group.setId(std::stoi(id));
+    return group;
 }
 
 
 bool Group::isOn() const {
-    Json::Value response = HTTPHandler::get(this->getRoute());
-    return response["any_on"].asBool();
+    Json::Value response = HTTPHandler::get(this->getRoute())["state"];
+    return response["all_on"].asBool();
 }
 
 Json::Value Group::setOn(const bool &on) {
+//    Json::Value body;
+//    body["any_on"] = on;
+//    Json::StreamWriterBuilder builder;
+//    return HTTPHandler::put(this->getRoute()+"/state", Json::writeString(builder, body));
     return this->setAttribute("on", on);
 }
 
@@ -126,7 +137,9 @@ Json::Value Group::setTransitionTime(const uint16_t &transitionTime) {
 uint Group::getId() const {
     return this->_id;
 }
-
+void Group::setId(uint id) {
+    this->_id = id;
+}
 std::string Group::getName() const {
     return HTTPHandler::get(this->getRoute())["name"].asString();
 }
@@ -152,7 +165,8 @@ Json::Value Group::setAttribute(const std::string &attr, const T &value) {
     Json::Value body;
     body[attr] = value;
     Json::StreamWriterBuilder builder;
-    return HTTPHandler::put(this->getRoute(), Json::writeString(builder, body));
+    auto response = HTTPHandler::put(this->getRoute()+"/action", Json::writeString(builder, body));
+    return response;
 
 }
 //! \brief special function for dealing with updating xy color space
@@ -162,7 +176,8 @@ Json::Value Group::setAttribute(const std::tuple<float, float> &value) {
     body["xy"].append(std::get<0>(value));
     body["xy"].append(std::get<1>(value));
     Json::StreamWriterBuilder builder;
-    return HTTPHandler::put(this->getRoute(), Json::writeString(builder, body));
+    std::cout << this->getRoute() << std::endl;
+    return HTTPHandler::put(this->getRoute()+"/action", Json::writeString(builder, body));
 }
 
 //! \brief special implementation for setting light array
@@ -173,6 +188,6 @@ Json::Value Group::setAttribute(const std::vector<Light> &lights) {
        body["lights"].append(light.getId());
     });
     Json::StreamWriterBuilder builder;
-    return HTTPHandler::put(this->getRoute(), Json::writeString(builder, body));
+    return HTTPHandler::put(this->getRoute()+"/action2", Json::writeString(builder, body));
 }
 
