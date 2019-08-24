@@ -3,16 +3,21 @@
 #include "json.h"
 using namespace lightspp;
 using namespace lightspp::Exceptions;
+
+std::shared_ptr<Bridge> *Bridge::bridge;
+
 //! Constructs a bridge object from the ip address of the bridge.
 Bridge::Bridge(const std::string &address) {
     this->_address = address + "/api/";
+    Bridge::bridge = new std::shared_ptr<Bridge>(this);
 }
 //! Constructs a bridge object from ip address and user hash
 Bridge::Bridge(const std::string &address, const std::string &userHash) {
     this->_address = address + "/api/";
     this->_userHash = userHash;
-
+    Bridge::bridge = new std::shared_ptr<Bridge>(this);
 }
+
 
 //!
 //! \brief Discovers near by bridges via the N-UPnP strategy
@@ -21,9 +26,10 @@ Bridge::Bridge(const std::string &address, const std::string &userHash) {
 Bridge Bridge::Discover() {
     auto result = HTTPHandler::get("https://discovery.meethue.com/");
     std::string ipAddress = result[0]["internalipaddress"].asString();
-    Bridge bridge(ipAddress);
+    Bridge *_bridge = new Bridge(ipAddress);
     Json::Value body;
-    return bridge;
+    Bridge::bridge = new std::shared_ptr<Bridge>(_bridge);
+    return *_bridge;
 
 }
 
@@ -57,3 +63,4 @@ std::string Bridge::createUser(const std::string &applicationName, const std::st
 void Bridge::setUser(const std::string &userHash) {
     this->_userHash = userHash;
 }
+

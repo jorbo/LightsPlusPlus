@@ -3,7 +3,7 @@
 
 
 
-Lights++ is a api library for the Phillips Hue lights system implemented in C++.
+Lights++ is a api wrapper for the Phillips Hue lights system implemented in C++.
 
 ## Goals:
 + Create a stable api for interacting with the hue lights
