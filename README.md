@@ -1,4 +1,4 @@
-# Lights++https://duckduckgo.com/?q=chat%5D&t=ffab&atb=v173-1
+# Lights++
 ![build](https://api.travis-ci.org/jorbo/LightsPlusPlus.svg?branch=master) [![codecov](https://codecov.io/gh/jorbo/LightsPlusPlus/branch/master/graph/badge.svg)](https://codecov.io/gh/jorbo/LightsPlusPlus)
 
 
